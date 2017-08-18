@@ -1,16 +1,11 @@
 module.exports = function() {
   StructureSpawn.prototype.createBalancedCreep = function(energy, roleName) {
+    const parts = Math.floor(energy / 200);
     const body = [];
-    while (energy > 0) {
-      body.push(MOVE);
-      energy -= 50;
+    for (let i = 0; i < parts; i++) {
       body.push(WORK);
-      energy -= 100;
       body.push(CARRY);
-      energy -= 50;
-      if (energy < 0) {
-        body.pop();
-      }
+      body.push(MOVE);
     }
 
     return this.createCreep(body, undefined, {
