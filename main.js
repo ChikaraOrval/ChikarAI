@@ -35,7 +35,7 @@ module.exports.loop = function() {
   const energy = Game.spawns.Spawn1.room.energyCapacityAvailable;
 
   if (currentHarvesters < minHarvesters) {
-    name = Game.spawns.Spawn1.createHarvester(energy);
+    name = Game.spawns.Spawn1.createBalancedCreep(energy, 'harvest');
     if (name === ERR_NOT_ENOUGH_ENERGY && currentHarvesters === 0) {
       name = Game.spawns.Spawn1.createBalancedCreep(
         Game.spawns.Spawn1.room.energyAvailable,
