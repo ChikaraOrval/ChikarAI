@@ -28,6 +28,16 @@ module.exports = {
       } else {
         creepBuild.run(creep);
       }
+    } else if (
+      Game.spawns.Spawn1.room.energyAvailable ===
+      Game.spawns.Spawn1.room.energyCapacityAvailable
+    ) {
+      const spawn = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
+        filter: x => x.structureType === STRUCTURE_SPAWN,
+      });
+      if (creep.withdraw(spawn, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+        creep.moveTo(spawn);
+      }
     } else {
       const source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
       if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
