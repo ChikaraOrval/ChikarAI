@@ -15,14 +15,11 @@ module.exports = {
       const constructionSite = creep.pos.findClosestByPath(
         FIND_CONSTRUCTION_SITES
       );
-      if (constructionSite !== null) {
-        console.log('1');
+      if (constructionSite !== null && constructionSite !== undefined) {
         if (creep.build(constructionSite) === ERR_NOT_IN_RANGE) {
           creep.moveTo(constructionSite);
-          console.log('2');
         }
       } else {
-        console.log('3');
         creepUpgrade.run(creep);
       }
     } else if (
