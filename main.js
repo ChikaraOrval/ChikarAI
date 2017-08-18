@@ -16,7 +16,14 @@ module.exports.loop = function() {
 
   let name;
   if (currentHarvesters < minHarvesters) {
-    name = Game.spawns.Spawn1.createCreep([WORK, WORK, CARRY, MOVE]);
+    name = Game.spawns.Spawn1.createCreep(
+      [WORK, WORK, CARRY, MOVE],
+      undefined,
+      {
+        role: 'harvester',
+        isMining: true,
+      }
+    );
   }
 
   if (!(name < 0)) {
