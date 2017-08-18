@@ -2,16 +2,16 @@ const creepUpgrade = require('./creepUpgrade');
 
 module.exports = {
   run(creep) {
-    if (creep.memory.isBuilding === false && creep.carry.energy === 0) {
-      creep.memory.isBuilding = true;
+    if (creep.memory.isWorking === false && creep.carry.energy === 0) {
+      creep.memory.isWorking = true;
     } else if (
-      creep.memory.isBuilding === true &&
+      creep.memory.isWorking === true &&
       creep.carry.energy === creep.carryCapacity
     ) {
-      creep.memory.isBuilding = false;
+      creep.memory.isWorking = false;
     }
 
-    if (creep.memory.isBuilding === false) {
+    if (creep.memory.isWorking === false) {
       const constructionSite = creep.pos.findClosestByPath(
         FIND_CONSTRUCTION_SITES
       );

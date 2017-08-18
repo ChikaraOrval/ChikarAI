@@ -32,7 +32,7 @@ module.exports.loop = function() {
       undefined,
       {
         role: 'harvest',
-        isMining: true,
+        isWorking: true,
       }
     );
   } else if (currentUpgraders < minUpgraders) {
@@ -41,7 +41,7 @@ module.exports.loop = function() {
       undefined,
       {
         role: 'upgrade',
-        isUpgrading: true,
+        isWorking: true,
       }
     );
   } else if (currentBuilders < minBuilders) {
@@ -50,7 +50,7 @@ module.exports.loop = function() {
       undefined,
       {
         role: 'build',
-        isBuilding: true,
+        isWorking: true,
       }
     );
   } else {

@@ -1,15 +1,15 @@
 module.exports = {
   run(creep) {
-    if (creep.memory.isMining === false && creep.carry.energy === 0) {
-      creep.memory.isMining = true;
+    if (creep.memory.isWorking === false && creep.carry.energy === 0) {
+      creep.memory.isWorking = true;
     } else if (
-      creep.memory.isMining === true &&
+      creep.memory.isWorking === true &&
       creep.carry.energy === creep.carryCapacity
     ) {
-      creep.memory.isMining = false;
+      creep.memory.isWorking = false;
     }
 
-    if (creep.memory.isMining === false) {
+    if (creep.memory.isWorking === false) {
       const structure = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
         filter: s => s.energy < s.energyCapacity,
       });
