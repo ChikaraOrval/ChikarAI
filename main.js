@@ -1,3 +1,4 @@
+require('./customSpawn')();
 const creepHarvest = require('./creepHarvest');
 const creepUpgrade = require('./creepUpgrade');
 const creepBuild = require('./creepBuild');
@@ -14,9 +15,9 @@ module.exports.loop = function() {
     }
   });
 
-  const minHarvesters = 2;
+  const minHarvesters = 3;
   const minUpgraders = 1;
-  const minBuilders = 4;
+  const minBuilders = 1;
 
   const currentHarvesters = _.sum(
     Game.creeps,
@@ -26,6 +27,8 @@ module.exports.loop = function() {
   const currentBuilders = _.sum(Game.creeps, c => c.memory.role === 'build');
 
   let name;
+  const energy = Game.spawns.Spawn1.room.energyCapacityAvailable;
+
   if (currentHarvesters < minHarvesters) {
     name = Game.spawns.Spawn1.createCreep(
       [WORK, WORK, CARRY, MOVE],
@@ -36,23 +39,9 @@ module.exports.loop = function() {
       }
     );
   } else if (currentUpgraders < minUpgraders) {
-    name = Game.spawns.Spawn1.createCreep(
-      [WORK, CARRY, MOVE, MOVE],
-      undefined,
-      {
-        role: 'upgrade',
-        isWorking: true,
-      }
-    );
+    name = Game.spawns.Spawn1.createBalancedCreep(energy, 'upgrade');
   } else if (currentBuilders < minBuilders) {
-    name = Game.spawns.Spawn1.createCreep(
-      [WORK, CARRY, MOVE, MOVE],
-      undefined,
-      {
-        role: 'build',
-        isWorking: true,
-      }
-    );
+    name = Game.spawns.Spawn1.createBalancedCreep(energy, 'build');
   } else {
     name = -1;
   }
