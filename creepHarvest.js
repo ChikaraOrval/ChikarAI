@@ -9,7 +9,7 @@ module.exports = {
       creep.memory.isMining = false;
     }
 
-    if (creep.memory.isMining === true) {
+    if (creep.memory.isMining === false) {
       const structure = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
         filter: s => s.energy < s.energyCapacity,
       });
