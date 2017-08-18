@@ -11,7 +11,7 @@ module.exports.loop = function() {
   const minHarvesters = 4;
   const currentHarvesters = _.sum(
     Game.creeps,
-    c => c.memory.role === 'harvester'
+    c => c.memory.role === 'harvest'
   );
 
   let name;
@@ -20,7 +20,7 @@ module.exports.loop = function() {
       [WORK, WORK, CARRY, MOVE],
       undefined,
       {
-        role: 'harvester',
+        role: 'harvest',
         isMining: true,
       }
     );
