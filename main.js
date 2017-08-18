@@ -3,6 +3,7 @@ const creepHarvest = require('./creepHarvest');
 const creepUpgrade = require('./creepUpgrade');
 const creepBuild = require('./creepBuild');
 const creepRepair = require('./creepRepair');
+const creepWallRepair = require('./creepWallRepair');
 
 module.exports.loop = function() {
   Object.keys(Game.creeps).forEach(creep => {
@@ -15,6 +16,8 @@ module.exports.loop = function() {
       creepBuild.run(creep);
     } else if (creep.memory.role === 'repair') {
       creepRepair.run(creep);
+    } else if (creep.memory.role === 'wallrepair') {
+      creepWallRepair.run(creep);
     }
   });
 
@@ -22,6 +25,7 @@ module.exports.loop = function() {
   const minUpgraders = 1;
   const minBuilders = 1;
   const minRepairers = 1;
+  const minWallRepairers = 1;
 
   const currentHarvesters = _.sum(
     Game.creeps,
@@ -30,6 +34,10 @@ module.exports.loop = function() {
   const currentUpgraders = _.sum(Game.creeps, c => c.memory.role === 'upgrade');
   const currentBuilders = _.sum(Game.creeps, c => c.memory.role === 'build');
   const currentRepairers = _.sum(Game.creeps, c => c.memory.role === 'repair');
+  const currentWallRepairers = _.sum(
+    Game.creeps,
+    c => c.memory.role === 'wallrepair'
+  );
 
   let name;
   const energy = Game.spawns.Spawn1.room.energyCapacityAvailable;
@@ -48,6 +56,8 @@ module.exports.loop = function() {
     name = Game.spawns.Spawn1.createBalancedCreep(energy, 'build');
   } else if (currentRepairers < minRepairers) {
     name = Game.spawns.Spawn1.createBalancedCreep(energy, 'repair');
+  } else if (currentWallRepairers < minWallRepairers) {
+    name = Game.spawns.Spawn1.createBalancedCreep(energy, 'wallrepair');
   } else {
     name = -1;
   }
