@@ -1,6 +1,6 @@
 module.exports = {
   run(creep) {
-    if (creep.memory.isMining === false && creep.memory.energy === 0) {
+    if (creep.memory.isMining === false && creep.carry.energy === 0) {
       creep.memory.isMining = true;
     } else if (
       creep.memory.isMining === true &&
