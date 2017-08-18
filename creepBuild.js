@@ -15,7 +15,7 @@ module.exports = {
       const constructionSite = creep.pos.findClosestByPath(
         FIND_CONSTRUCTION_SITES
       );
-      if (constructionSite !== undefined) {
+      if (constructionSite !== null) {
         console.log('1');
         if (creep.build(constructionSite) === ERR_NOT_IN_RANGE) {
           creep.moveTo(constructionSite);
