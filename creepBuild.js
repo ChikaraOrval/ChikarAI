@@ -16,10 +16,13 @@ module.exports = {
         FIND_CONSTRUCTION_SITES
       );
       if (constructionSite !== undefined) {
+        console.log('1');
         if (creep.build(constructionSite) === ERR_NOT_IN_RANGE) {
           creep.moveTo(constructionSite);
+          console.log('2');
         }
       } else {
+        console.log('3');
         creepUpgrade.run(creep);
       }
     } else if (
