@@ -6,6 +6,12 @@ const creepRepair = require('./creepRepair');
 const creepWallRepair = require('./creepWallRepair');
 
 module.exports.loop = function() {
+  Object.keys(Memory.creeps).forEach(creep => {
+    if (Game.creeps[creep] === undefined) {
+      delete Memory.creeps[creep];
+    }
+  });
+
   Object.keys(Game.creeps).forEach(creep => {
     creep = Game.creeps[creep];
     if (creep.memory.role === 'harvest') {
