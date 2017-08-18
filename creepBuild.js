@@ -23,7 +23,9 @@ module.exports = {
         creepUpgrade.run(creep);
       }
     } else {
-      let source;
+      let source = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
+        filter: x => x.structureType === STRUCTURE_SPAWN,
+      });
       if (
         Game.spawns.Spawn1.room.energyAvailable ===
         Game.spawns.Spawn1.room.energyCapacityAvailable
