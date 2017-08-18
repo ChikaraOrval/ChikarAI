@@ -13,7 +13,9 @@ module.exports = {
 
     if (creep.memory.isWorking === false) {
       let walls = creep.room.find(FIND_STRUCTURES, {
-        filter: s => s.structureType === STRUCTURE_WALL,
+        filter: s =>
+          s.structureType === STRUCTURE_WALL ||
+          s.structureType === STRUCTURE_RAMPART,
       });
 
       walls = walls.sort(
