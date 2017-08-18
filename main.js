@@ -18,9 +18,9 @@ module.exports.loop = function() {
     }
   });
 
-  const minHarvesters = 2;
+  const minHarvesters = 3;
   const minUpgraders = 1;
-  const minBuilders = 2;
+  const minBuilders = 1;
   const minRepairers = 1;
 
   const currentHarvesters = _.sum(
