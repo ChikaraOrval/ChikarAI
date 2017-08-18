@@ -27,7 +27,7 @@ module.exports.loop = function() {
     }
   });
 
-  const minHarvesters = 2;
+  const minHarvesters = 3;
   const minUpgraders = 2;
   const minBuilders = 1;
   const minRepairers = 2;
