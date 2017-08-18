@@ -30,14 +30,7 @@ module.exports.loop = function() {
   const energy = Game.spawns.Spawn1.room.energyCapacityAvailable;
 
   if (currentHarvesters < minHarvesters) {
-    name = Game.spawns.Spawn1.createCreep(
-      [WORK, WORK, CARRY, MOVE],
-      undefined,
-      {
-        role: 'harvest',
-        isWorking: true,
-      }
-    );
+    name = Game.spawns.Spawn1.createHarvester(energy);
   } else if (currentUpgraders < minUpgraders) {
     name = Game.spawns.Spawn1.createBalancedCreep(energy, 'upgrade');
   } else if (currentBuilders < minBuilders) {
