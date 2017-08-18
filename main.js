@@ -12,7 +12,7 @@ module.exports.loop = function() {
   });
 
   const minHarvesters = 4;
-  const minUpgraders = 2;
+  const minUpgraders = 3;
 
   const currentHarvesters = _.sum(
     Game.creeps,
