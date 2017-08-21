@@ -32,7 +32,9 @@ module.exports = {
       }
     } else {
       const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-        filter: x => x.structureType === STRUCTURE_CONTAINER,
+        filter: x =>
+          x.structureType === STRUCTURE_CONTAINER &&
+          x.store[RESOURCE_ENERGY] > 0,
       });
       if (container !== null) {
         if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
