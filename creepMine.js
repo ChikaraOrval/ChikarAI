@@ -11,8 +11,8 @@ module.exports = {
       creep.harvest(source);
     } else {
       console.log('mine 3');
-      console.log(container);
-      creep.moveTo(container);
+      console.log(container.pos);
+      creep.moveTo(container.pos);
     }
   },
 };
