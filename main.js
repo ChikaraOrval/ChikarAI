@@ -27,48 +27,47 @@ module.exports.loop = function() {
     }
   });
 
-  const minHarvesters = 2;
-  const minUpgraders = 1;
-  const minBuilders = 1;
-  const minRepairers = 1;
-  const minWallRepairers = 1;
+  Object.keys(Game.spawns).forEach(spawn => {
+    spawn = Game.spawns[spawn];
+    const roomCreeps = spawn.room.find(FIND_MY_CREEPS);
 
-  const currentHarvesters = _.sum(
-    Game.creeps,
-    c => c.memory.role === 'harvest'
-  );
-  const currentUpgraders = _.sum(Game.creeps, c => c.memory.role === 'upgrade');
-  const currentBuilders = _.sum(Game.creeps, c => c.memory.role === 'build');
-  const currentRepairers = _.sum(Game.creeps, c => c.memory.role === 'repair');
-  const currentWallRepairers = _.sum(
-    Game.creeps,
-    c => c.memory.role === 'wallrepair'
-  );
+    const currentHarvesters = _.sum(
+      roomCreeps,
+      c => c.memory.role === 'harvest'
+    );
+    const currentUpgraders = _.sum(
+      roomCreeps,
+      c => c.memory.role === 'upgrade'
+    );
+    const currentBuilders = _.sum(roomCreeps, c => c.memory.role === 'build');
+    const currentRepairers = _.sum(roomCreeps, c => c.memory.role === 'repair');
+    const currentWallRepairers = _.sum(
+      roomCreeps,
+      c => c.memory.role === 'wallrepair'
+    );
 
-  let name;
-  const energy = Game.spawns.Spawn1.room.energyCapacityAvailable;
+    let name;
+    const energy = spawn.room.energyCapacityAvailable;
 
-  if (currentHarvesters < minHarvesters) {
-    name = Game.spawns.Spawn1.createBalancedCreep(energy, 'harvest');
-    if (name === ERR_NOT_ENOUGH_ENERGY && currentHarvesters === 0) {
-      name = Game.spawns.Spawn1.createBalancedCreep(
-        Game.spawns.Spawn1.room.energyAvailable,
-        'harvest'
-      );
+    if (currentHarvesters < spawn.memory.minHarvesters) {
+      name = spawn.createBalancedCreep(energy, 'harvest');
+      if (name === ERR_NOT_ENOUGH_ENERGY && currentHarvesters === 0) {
+        name = spawn.createBalancedCreep(spawn.room.energyAvailable, 'harvest');
+      }
+    } else if (currentUpgraders < spawn.memory.minUpgraders) {
+      name = spawn.createBalancedCreep(energy, 'upgrade');
+    } else if (currentBuilders < spawn.memory.minBuilders) {
+      name = spawn.createBalancedCreep(energy, 'build');
+    } else if (currentRepairers < spawn.memory.minRepairers) {
+      name = spawn.createBalancedCreep(energy, 'repair');
+    } else if (currentWallRepairers < spawn.memory.minWallRepairers) {
+      name = spawn.createBalancedCreep(energy, 'wallrepair');
+    } else {
+      name = -1;
     }
-  } else if (currentUpgraders < minUpgraders) {
-    name = Game.spawns.Spawn1.createBalancedCreep(energy, 'upgrade');
-  } else if (currentBuilders < minBuilders) {
-    name = Game.spawns.Spawn1.createBalancedCreep(energy, 'build');
-  } else if (currentRepairers < minRepairers) {
-    name = Game.spawns.Spawn1.createBalancedCreep(energy, 'repair');
-  } else if (currentWallRepairers < minWallRepairers) {
-    name = Game.spawns.Spawn1.createBalancedCreep(energy, 'wallrepair');
-  } else {
-    name = -1;
-  }
 
-  if (!(name < 0)) {
-    console.log(`Spawned :${name}`);
-  }
+    if (!(name < 0)) {
+      console.log(`Spawned :${name}`);
+    }
+  });
 };
