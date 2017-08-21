@@ -12,6 +12,17 @@ module.exports.loop = function() {
     }
   });
 
+  const towers = _.filter(
+    Game.structures,
+    s => s.structureType === STRUCTURE_TOWER
+  );
+  Object.keys(towers).forEach(tower => {
+    const target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+    if (target !== undefined) {
+      tower.attack(target);
+    }
+  });
+
   Object.keys(Game.creeps).forEach(creep => {
     creep = Game.creeps[creep];
     if (creep.memory.role === 'harvest') {
