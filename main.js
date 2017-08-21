@@ -27,10 +27,10 @@ module.exports.loop = function() {
     }
   });
 
-  const minHarvesters = 3;
-  const minUpgraders = 2;
+  const minHarvesters = 2;
+  const minUpgraders = 1;
   const minBuilders = 1;
-  const minRepairers = 2;
+  const minRepairers = 1;
   const minWallRepairers = 1;
 
   const currentHarvesters = _.sum(
