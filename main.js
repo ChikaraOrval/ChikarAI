@@ -4,6 +4,8 @@ const creepUpgrade = require('./creepUpgrade');
 const creepBuild = require('./creepBuild');
 const creepRepair = require('./creepRepair');
 const creepWallRepair = require('./creepWallRepair');
+const creepMine = require('./creepMine');
+const creepTransport = require('./creepTransport');
 
 module.exports.loop = function() {
   Object.keys(Memory.creeps).forEach(creep => {
@@ -17,7 +19,7 @@ module.exports.loop = function() {
     s => s.structureType === STRUCTURE_TOWER
   );
 
-  for (let tower of towers) {
+  for (const tower of towers) {
     const target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
     if (target !== null) {
       target.attack(target);
@@ -36,6 +38,10 @@ module.exports.loop = function() {
       creepRepair.run(creep);
     } else if (creep.memory.role === 'wallrepair') {
       creepWallRepair.run(creep);
+    } else if (creep.memory.role === 'mine') {
+      creepMine.run(creep);
+    } else if (creep.memory.role === 'transport') {
+      creepTransport.run(creep);
     }
   });
 
@@ -57,25 +63,58 @@ module.exports.loop = function() {
       roomCreeps,
       c => c.memory.role === 'wallrepair'
     );
+    const currentMiners = _.sum(roomCreeps, c => c.memory.role === 'mine');
+    const currentTransporters = _.sum(
+      roomCreeps,
+      c => c.memory.role === 'transport'
+    );
 
     let name;
     const energy = spawn.room.energyCapacityAvailable;
 
-    if (currentHarvesters < spawn.memory.minHarvesters) {
-      name = spawn.createBalancedCreep(energy, 'harvest');
-      if (name === ERR_NOT_ENOUGH_ENERGY && currentHarvesters === 0) {
+    if (currentMiners === 0 && currentTransporters === 0) {
+      if (currentMiners > 0) {
+        name = spawn.createTransporter(150);
+      } else {
         name = spawn.createBalancedCreep(spawn.room.energyAvailable, 'harvest');
       }
-    } else if (currentUpgraders < spawn.memory.minUpgraders) {
-      name = spawn.createBalancedCreep(energy, 'upgrade');
-    } else if (currentBuilders < spawn.memory.minBuilders) {
-      name = spawn.createBalancedCreep(energy, 'build');
-    } else if (currentRepairers < spawn.memory.minRepairers) {
-      name = spawn.createBalancedCreep(energy, 'repair');
-    } else if (currentWallRepairers < spawn.memory.minWallRepairers) {
-      name = spawn.createBalancedCreep(energy, 'wallrepair');
     } else {
-      name = -1;
+      const sources = spawn.room.find(FIND_SOURCES);
+
+      for (let i = 0; i < sources.length; i += 1) {
+        if (
+          !_.some(
+            roomCreeps,
+            c => c.memory.role === 'mine' && c.memory.sourceId === sources[i].id
+          )
+        ) {
+          const containers = sources[i].pos.findInRange(FIND_STRUCTURES, 1, {
+            filter: s => s.structureType === STRUCTURE_CONTAINER,
+          });
+          if (containers.length > 0) {
+            name = spawn.createMiner(sources[i].id);
+            break;
+          }
+        }
+      }
+    }
+
+    if (name === undefined) {
+      if (currentHarvesters < spawn.memory.minHarvesters) {
+        name = spawn.createBalancedCreep(energy, 'harvest');
+      } else if (currentTransporters < spawn.memory.minTransporters) {
+        name = spawn.createTransporter(150);
+      } else if (currentUpgraders < spawn.memory.minUpgraders) {
+        name = spawn.createBalancedCreep(energy, 'upgrade');
+      } else if (currentBuilders < spawn.memory.minBuilders) {
+        name = spawn.createBalancedCreep(energy, 'build');
+      } else if (currentRepairers < spawn.memory.minRepairers) {
+        name = spawn.createBalancedCreep(energy, 'repair');
+      } else if (currentWallRepairers < spawn.memory.minWallRepairers) {
+        name = spawn.createBalancedCreep(energy, 'wallrepair');
+      } else {
+        name = -1;
+      }
     }
 
     if (!(name < 0)) {
