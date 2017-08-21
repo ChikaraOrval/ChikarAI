@@ -18,7 +18,7 @@ module.exports.loop = function() {
   );
   for (let tower of towers) {
     const target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-    if (target !== undefined) {
+    if (target !== null) {
       target.attack(target);
     }
   }
