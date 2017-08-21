@@ -23,7 +23,7 @@ module.exports = {
         creepUpgrade.run(creep);
       }
     } else {
-      const container = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
+      const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
         filter: x => x.structureType === STRUCTURE_CONTAINER,
       });
       if (container !== null) {
