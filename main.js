@@ -72,7 +72,7 @@ module.exports.loop = function() {
     let name;
     const energy = spawn.room.energyCapacityAvailable;
 
-    if (currentMiners === 0 && currentTransporters === 0) {/aasda
+    if (currentHarvesters === 0 && currentTransporters === 0) {
       if (currentMiners > 0) {
         name = spawn.createTransporter(150);
       } else {
