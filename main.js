@@ -16,6 +16,7 @@ module.exports.loop = function() {
     Game.structures,
     s => s.structureType === STRUCTURE_TOWER
   );
+
   for (let tower of towers) {
     const target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
     if (target !== null) {
