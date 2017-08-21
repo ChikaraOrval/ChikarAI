@@ -5,14 +5,14 @@ module.exports = {
       filter: s => s.structureType === STRUCTURE_CONTAINER,
     });
     console.log('mine 1');
-    if (creep.pos.isEqualTo(container.pos)) {
+    if (creep.pos.isEqualTo(container)) {
       console.log('mine 2');
 
       creep.harvest(source);
     } else {
       console.log('mine 3');
-      console.log(container.pos);
-      creep.moveTo(container.pos);
+      console.log(container);
+      creep.moveTo(container);
     }
   },
 };
