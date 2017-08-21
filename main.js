@@ -16,12 +16,12 @@ module.exports.loop = function() {
     Game.structures,
     s => s.structureType === STRUCTURE_TOWER
   );
-  Object.keys(towers).forEach(tower => {
+  for (let tower of towers) {
     const target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
     if (target !== undefined) {
-      tower.attack(target);
+      target.attack(target);
     }
-  });
+  }
 
   Object.keys(Game.creeps).forEach(creep => {
     creep = Game.creeps[creep];
