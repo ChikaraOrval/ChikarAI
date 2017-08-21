@@ -1,5 +1,7 @@
 module.exports = {
   run(creep) {
+    console.log('transport');
+
     if (creep.memory.isWorking === false && creep.carry.energy === 0) {
       creep.memory.isWorking = true;
     } else if (
