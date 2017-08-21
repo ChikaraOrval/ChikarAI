@@ -80,7 +80,7 @@ module.exports.loop = function() {
       }
     } else {
       const sources = spawn.room.find(FIND_SOURCES);
-
+      console.log('log 1');
       for (let i = 0; i < sources.length; i += 1) {
         if (
           !_.some(
@@ -88,11 +88,15 @@ module.exports.loop = function() {
             c => c.memory.role === 'mine' && c.memory.sourceId === sources[i].id
           )
         ) {
+          console.log('log 2');
+
           const containers = sources[i].pos.findInRange(FIND_STRUCTURES, 1, {
             filter: s => s.structureType === STRUCTURE_CONTAINER,
           });
           if (containers.length > 0) {
             name = spawn.createMiner(sources[i].id);
+            console.log('log 3');
+
             break;
           }
         }
