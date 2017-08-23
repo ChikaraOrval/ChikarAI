@@ -19,8 +19,8 @@ Creep.prototype.getEnergy = function(useContainer, useEnergySource) {
   if (useContainer) {
     container = this.pos.findClosestByPath(FIND_STRUCTURES, {
       filter: x =>
-        x.structureType ===
-          (STRUCTURE_CONTAINER || x.structureType === STRUCTURE_STORAGE) &&
+        (x.structureType === STRUCTURE_CONTAINER ||
+          x.structureType === STRUCTURE_STORAGE) &&
         x.store[RESOURCE_ENERGY] > 500,
     });
 
