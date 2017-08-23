@@ -18,7 +18,7 @@ module.exports = {
           s.energy < s.energyCapacity,
       });
 
-      if (structure !== null) {
+      if (structure === null) {
         structure = creep.room.storage;
       }
 
