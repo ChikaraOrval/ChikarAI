@@ -13,6 +13,9 @@ module.exports = {
         }
 
         const enemyLair = creep.pos.findClosestByRange(FIND_HOSTILE_SPAWNS);
+        console.log(enemy);
+        console.log('sep');
+        console.log(enemyLair);
         if (enemy === null && enemyLair) {
           if (creep.attack(enemyLair) === ERR_NOT_IN_RANGE) {
             creep.moveTo(enemyLair);
