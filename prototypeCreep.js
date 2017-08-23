@@ -6,7 +6,7 @@ const roles = {
   wallrepair: require('./creepWallRepair'),
   mine: require('./creepMine'),
   transport: require('./creepTransport'),
-  longDistance: require('./creepLongDistance'),
+  longdistance: require('./creepLongDistance'),
 };
 
 Creep.prototype.runRole = function() {
