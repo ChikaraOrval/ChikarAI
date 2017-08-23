@@ -7,6 +7,8 @@ module.exports = {
       if (creep.room.name === attackFlag.pos.roomName) {
         const enemy = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
         if (enemy) {
+          console.log(enemy);
+          console.log(creep.attack(enemy));
           if (creep.attack(enemy) === ERR_NOT_IN_RANGE) {
             creep.moveTo(enemy);
           }
