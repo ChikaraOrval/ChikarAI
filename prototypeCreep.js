@@ -7,6 +7,7 @@ const roles = {
   mine: require('./creepMine'),
   transport: require('./creepTransport'),
   longdistance: require('./creepLongDistance'),
+  attack: require('./creepAttack'),
 };
 
 Creep.prototype.runRole = function() {

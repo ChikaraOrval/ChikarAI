@@ -6,6 +6,7 @@ const listOfRoles = [
   'wallrepair',
   'mine',
   'transport',
+  'attack',
 ];
 
 StructureSpawn.prototype.spawnCreeps = function() {
