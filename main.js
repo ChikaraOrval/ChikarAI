@@ -1,5 +1,5 @@
 require('./customSpawn')();
-require('./prototypeCreep')();
+require('./prototypeCreep');
 
 module.exports.loop = function() {
   Object.keys(Memory.creeps).forEach(creep => {
