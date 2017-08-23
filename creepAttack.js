@@ -5,16 +5,16 @@ module.exports = {
 
     if (attackFlag) {
       if (creep.room.name === attackFlag.pos.roomName) {
-        const enemy = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        const enemy = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
         if (enemy) {
-          if (creep.rangedAttack(enemy) === ERR_NOT_IN_RANGE) {
+          if (creep.attack(enemy) === ERR_NOT_IN_RANGE) {
             creep.moveTo(enemy);
           }
         }
 
-        const enemyLair = creep.room.find(FIND_HOSTILE_STRUCTURES)[0];
+        const enemyLair = creep.pos.findClosestByPath(FIND_HOSTILE_STRUCTURES);
         if (enemy === null && enemyLair) {
-          if (creep.rangedAttack(enemyLair) === ERR_NOT_IN_RANGE) {
+          if (creep.attack(enemyLair) === ERR_NOT_IN_RANGE) {
             creep.moveTo(enemyLair);
           }
         }
