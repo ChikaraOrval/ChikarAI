@@ -16,7 +16,7 @@ module.exports = {
         filter: s => s.hits < 2000000 && s.structureType === STRUCTURE_RAMPART,
       });
 
-      if (structure !== undefined) {
+      if (structure !== null) {
         if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
           creep.moveTo(structure);
         }
