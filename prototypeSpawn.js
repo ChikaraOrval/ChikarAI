@@ -14,7 +14,7 @@ StructureSpawn.prototype.spawnCreeps = function() {
   const roomCreeps = room.find(FIND_MY_CREEPS);
 
   const currentCreeps = {};
-  for (let i = 0; i < listOfRoles; i += 1) {
+  for (let i = 0; i < listOfRoles.length; i += 1) {
     currentCreeps[listOfRoles[i]] = _.sum(
       roomCreeps,
       c => c.memory.role === listOfRoles[i]
@@ -27,16 +27,12 @@ StructureSpawn.prototype.spawnCreeps = function() {
   let name;
 
   if (currentCreeps.harvest === 0 && currentCreeps.transport === 0) {
-    console.log('no harvest/transport');
     if (currentCreeps.mine > 0) {
-      console.log('have miner');
       name = this.createTransporter(150);
     } else {
-      console.log('no miners');
       name = this.createBalancedCreep(room.energyAvailable, 'harvest');
     }
   } else {
-    console.log('else loop');
     const sources = room.find(FIND_SOURCES);
     for (let i = 0; i < sources.length; i += 1) {
       if (
@@ -45,7 +41,6 @@ StructureSpawn.prototype.spawnCreeps = function() {
           c => c.memory.role === 'mine' && c.memory.sourceId === sources[i].id
         )
       ) {
-        console.log('in else if loop');
         const containers = sources[i].pos.findInRange(FIND_STRUCTURES, 1, {
           filter: s => s.structureType === STRUCTURE_CONTAINER,
         });
@@ -57,10 +52,7 @@ StructureSpawn.prototype.spawnCreeps = function() {
     }
   }
 
-  console.log(`${name}equals `);
-
   if (name === undefined) {
-    console.log('in undef loop');
     for (let i = 0; i < listOfRoles.length; i += 1) {
       console.log('1');
       console.log(`${currentCreeps[listOfRoles[i]]}cr`);
