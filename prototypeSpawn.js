@@ -61,7 +61,7 @@ StructureSpawn.prototype.spawnCreeps = function() {
     }
   }
 
-  if (!(name < 0)) {
+  if (name !== undefined && _.isString(name)) {
     console.log(`Spawned :${name}`);
   }
 };
