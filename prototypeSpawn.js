@@ -18,8 +18,6 @@ StructureSpawn.prototype.spawnCreeps = function() {
       roomCreeps,
       c => c.memory.role === listOfRoles[i]
     );
-
-    console.log(`${listOfRoles[i]} : ${currentCreeps[listOfRoles[i]]}`);
   }
 
   const roomMaxEnergy = room.energyCapacityAvailable;
@@ -53,18 +51,12 @@ StructureSpawn.prototype.spawnCreeps = function() {
 
   if (name === undefined) {
     for (let i = 0; i < listOfRoles.length; i += 1) {
-      console.log('1');
-      console.log(`${currentCreeps[listOfRoles[i]]}cr`);
-      console.log(`${this.memory.minCreeps}mm`);
       if (
         currentCreeps[listOfRoles[i]] < this.memory.minCreeps[listOfRoles[i]]
       ) {
-        console.log('2');
         if (listOfRoles[i] === 'transport') {
-          console.log('3');
           this.createTransporter(150);
         } else {
-          console.log('4');
           this.createBalancedCreep(roomMaxEnergy, listOfRoles[i]);
         }
       }
@@ -72,7 +64,13 @@ StructureSpawn.prototype.spawnCreeps = function() {
   }
 
   if (name !== undefined && _.isString(name)) {
-    console.log(`Spawned :${name}`);
+    console.log(
+      `${this.name} spawned new creep: ${name} (${Game.creeps[name].memory
+        .role})`
+    );
+    for (const role of listOfRoles) {
+      console.log(`${role}: ${currentCreeps[role]}`);
+    }
   }
 };
 
