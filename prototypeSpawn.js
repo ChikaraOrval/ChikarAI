@@ -9,7 +9,6 @@ const listOfRoles = [
 ];
 
 StructureSpawn.prototype.spawnCreeps = function() {
-  console.log('in function');
   const room = this.room;
   const roomCreeps = room.find(FIND_MY_CREEPS);
 
@@ -57,7 +56,9 @@ StructureSpawn.prototype.spawnCreeps = function() {
       console.log('1');
       console.log(`${currentCreeps[listOfRoles[i]]}cr`);
       console.log(`${this.memory.minCreeps}mm`);
-      if (currentCreeps[listOfRoles[i]] < this.memory.minCreeps) {
+      if (
+        currentCreeps[listOfRoles[i]] < this.memory.minCreeps[listOfRoles[i]]
+      ) {
         console.log('2');
         if (listOfRoles[i] === 'transport') {
           console.log('3');
