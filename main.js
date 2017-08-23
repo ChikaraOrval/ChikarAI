@@ -18,6 +18,16 @@ module.exports.loop = function() {
     if (target !== null) {
       tower.attack(target);
     }
+
+    const structure = tower.room.find(FIND_STRUCTURES, {
+      filter: s =>
+        s.hits < s.hitsMax &&
+        s.structureType !== STRUCTURE_WALL &&
+        s.structureType !== STRUCTURE_RAMPART,
+    });
+    if (structure) {
+      tower.repair(structure);
+    }
   }
 
   Object.keys(Game.creeps).forEach(creep => {
