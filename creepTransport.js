@@ -10,26 +10,35 @@ module.exports = {
     }
 
     if (creep.memory.isWorking === false) {
-      const structure = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
+      let structure = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
         filter: s =>
           (s.structureType === STRUCTURE_SPAWN ||
             s.structureType === STRUCTURE_EXTENSION ||
             s.structureType === STRUCTURE_TOWER) &&
           s.energy < s.energyCapacity,
       });
+
       if (structure !== null) {
+        structure = creep.room.storage;
+      }
+
+      if (structure !== undefined && structure !== null) {
         if (creep.transfer(structure, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
           creep.moveTo(structure);
         }
       }
     } else {
-      const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+      let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
         filter: s =>
           s.structureType === STRUCTURE_CONTAINER &&
           s.store[RESOURCE_ENERGY] > 0,
       });
 
       if (container !== null) {
+        container = creep.room.storage;
+      }
+
+      if (container !== undefined && container !== null) {
         if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
           creep.moveTo(container);
         }
