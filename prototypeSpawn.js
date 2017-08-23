@@ -61,7 +61,7 @@ StructureSpawn.prototype.spawnCreeps = function() {
 
   if (name === undefined) {
     console.log('in undef loop');
-    for (let i = 0; i < listOfRoles; i += 1) {
+    for (let i = 0; i < listOfRoles.length; i += 1) {
       console.log('1');
       if (currentCreeps[listOfRoles[i]] < this.memory.minCreeps) {
         console.log('2');
