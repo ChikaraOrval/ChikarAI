@@ -12,7 +12,7 @@ module.exports = {
           }
         }
 
-        const enemyLair = creep.room.find(FIND_HOSTILE_SPAWNS)[0];
+        const enemyLair = creep.room.find(FIND_HOSTILE_STRUCTURES)[0];
         console.log(enemy);
         console.log('sep');
         console.log(enemyLair);
