@@ -3,7 +3,9 @@ module.exports = {
     const attackFlag = Game.flags.attackFlag;
     const moveFlag = Game.flags.moveFlag;
     if (attackFlag) {
+      console.log('attack flag found');
       if (creep.room.name === attackFlag.pos.roomName) {
+        console.log('found');
         const enemy = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if (enemy) {
           if (creep.attack(enemy) === ERR_NOT_IN_RANGE) {
@@ -11,6 +13,7 @@ module.exports = {
           }
         }
       } else {
+        console.log('not found');
         const exit = creep.room.findExitTo(attackFlag.pos.roomName);
         creep.moveTo(exit);
       }
