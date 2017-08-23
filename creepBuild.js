@@ -23,21 +23,7 @@ module.exports = {
         creepUpgrade.run(creep);
       }
     } else {
-      const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-        filter: x =>
-          x.structureType === STRUCTURE_CONTAINER &&
-          x.store[RESOURCE_ENERGY] > 0,
-      });
-      if (container !== null) {
-        if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-          creep.moveTo(container);
-        }
-      } else {
-        const source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
-        if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-          creep.moveTo(source);
-        }
-      }
+      creep.getEnergy(true, true);
     }
   },
 };
