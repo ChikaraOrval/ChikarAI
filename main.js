@@ -25,9 +25,9 @@ module.exports.loop = function() {
         s.structureType !== STRUCTURE_WALL &&
         s.structureType !== STRUCTURE_RAMPART,
     });
-    console.log(structure);
+    console.log(structure[0]);
     if (structure) {
-      tower.repair(structure);
+      tower.repair(structure[0]);
     }
   }
 
