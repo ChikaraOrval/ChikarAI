@@ -2,6 +2,7 @@ module.exports = {
   run(creep) {
     const attackFlag = Game.flags.attackFlag;
     const moveFlag = Game.flags.moveFlag;
+
     if (attackFlag) {
       console.log('attack flag found');
       if (creep.room.name === attackFlag.pos.roomName) {
@@ -15,6 +16,9 @@ module.exports = {
       } else {
         console.log('not found');
         const exit = creep.room.findExitTo(attackFlag.pos.roomName);
+        console.log(exit);
+        const exit2 = creep.room.findExitTo(attackFlag);
+        console.log(exit2);
         creep.moveTo(exit);
       }
     } else if (moveFlag) {
