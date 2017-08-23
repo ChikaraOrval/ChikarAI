@@ -56,7 +56,7 @@ StructureSpawn.prototype.spawnCreeps = function() {
         currentCreeps[listOfRoles[i]] < this.memory.minCreeps[listOfRoles[i]]
       ) {
         if (listOfRoles[i] === 'transport') {
-          name = this.createTransporter(150);
+          name = this.createTransporter(300);
         } else {
           name = this.createBalancedCreep(roomMaxEnergy, listOfRoles[i]);
         }
