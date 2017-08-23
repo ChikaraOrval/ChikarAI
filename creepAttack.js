@@ -18,6 +18,7 @@ module.exports = {
         console.log(enemyLair);
         if (enemy === null && enemyLair) {
           console.log('in');
+          console.log(creep.attack(enemyLair));
           if (creep.attack(enemyLair) === ERR_NOT_IN_RANGE) {
             console.log('err');
             creep.moveTo(creep.pos.findClosestByPath(enemyLair));
