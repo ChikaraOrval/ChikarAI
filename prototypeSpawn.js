@@ -63,6 +63,8 @@ StructureSpawn.prototype.spawnCreeps = function() {
     console.log('in undef loop');
     for (let i = 0; i < listOfRoles.length; i += 1) {
       console.log('1');
+      console.log(`${currentCreeps[listOfRoles[i]]}cr`);
+      console.log(`${this.memory.minCreeps}mm`);
       if (currentCreeps[listOfRoles[i]] < this.memory.minCreeps) {
         console.log('2');
         if (listOfRoles[i] === 'transport') {
