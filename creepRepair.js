@@ -13,7 +13,7 @@ module.exports = {
 
     if (creep.memory.isWorking === false) {
       const structure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-        filter: s => s.hits < s.hitsMax && s.structureType !== STRUCTURE_WALL,
+        filter: s => s.hits < 2000000 && s.structureType === STRUCTURE_RAMPART,
       });
 
       if (structure !== undefined) {
