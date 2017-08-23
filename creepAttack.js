@@ -18,7 +18,7 @@ module.exports = {
         console.log(enemyLair);
         if (enemy === null && enemyLair) {
           if (creep.attack(enemyLair) === ERR_NOT_IN_RANGE) {
-            creep.moveTo(enemyLair);
+            creep.moveTo(creep.pos.findClosestByPath(enemyLair));
           }
         }
       } else {
