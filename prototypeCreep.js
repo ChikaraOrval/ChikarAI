@@ -21,7 +21,7 @@ Creep.prototype.getEnergy = function(useContainer, useEnergySource) {
       filter: x =>
         x.structureType ===
           (STRUCTURE_CONTAINER || x.structureType === STRUCTURE_STORAGE) &&
-        x.store[RESOURCE_ENERGY] > 0,
+        x.store[RESOURCE_ENERGY] > 500,
     });
 
     if (container !== null) {
