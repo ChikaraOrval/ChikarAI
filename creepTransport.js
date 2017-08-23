@@ -22,7 +22,8 @@ module.exports = {
         structure = creep.room.storage;
       }
 
-      if (structure !== undefined && structure !== null) {
+      console.log(structure);
+      if (structure) {
         if (creep.transfer(structure, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
           creep.moveTo(structure);
         }
