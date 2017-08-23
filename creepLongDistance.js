@@ -35,6 +35,7 @@ module.exports = {
     } else if (creep.room.name === creep.memory.targetRoom) {
       console.log('in here');
       const source = creep.room.find(FIND_SOURCES)[creep.memory.sourceId];
+      console.log(source);
       if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
         creep.moveTo(source);
       }
