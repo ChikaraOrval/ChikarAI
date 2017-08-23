@@ -33,11 +33,13 @@ module.exports = {
         creep.moveTo(creep.pos.findClosestByPath(exit));
       }
     } else if (creep.room.name === creep.memory.targetRoom) {
+      console.log('in here');
       const source = creep.room.find(FIND_SOURCES)[creep.memory.sourceId];
       if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
         creep.moveTo(source);
       }
     } else {
+      console.log('in the else');
       const exit = creep.room.findExitTo(creep.memory.targetRoom);
       creep.moveTo(creep.pos.findClosestByPath(exit));
     }
