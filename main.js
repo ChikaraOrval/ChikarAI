@@ -1,4 +1,5 @@
 require('./customSpawn')();
+require('./prototypeCreep')();
 const creepHarvest = require('./creepHarvest');
 const creepUpgrade = require('./creepUpgrade');
 const creepBuild = require('./creepBuild');
