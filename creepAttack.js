@@ -11,6 +11,13 @@ module.exports = {
             creep.moveTo(enemy);
           }
         }
+
+        const enemyLair = creep.pos.findClosestByRange(FIND_HOSTILE_SPAWNS);
+        if (enemy === null && enemyLair) {
+          if (creep.attack(enemyLair) === ERR_NOT_IN_RANGE) {
+            creep.moveTo(enemyLair);
+          }
+        }
       } else {
         const exit = creep.room.findExitTo(attackFlag.pos.roomName);
         creep.moveTo(creep.pos.findClosestByPath(exit));
