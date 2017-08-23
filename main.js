@@ -1,12 +1,5 @@
 require('./customSpawn')();
 require('./prototypeCreep')();
-const creepHarvest = require('./creepHarvest');
-const creepUpgrade = require('./creepUpgrade');
-const creepBuild = require('./creepBuild');
-const creepRepair = require('./creepRepair');
-const creepWallRepair = require('./creepWallRepair');
-const creepMine = require('./creepMine');
-const creepTransport = require('./creepTransport');
 
 module.exports.loop = function() {
   Object.keys(Memory.creeps).forEach(creep => {
@@ -28,22 +21,7 @@ module.exports.loop = function() {
   }
 
   Object.keys(Game.creeps).forEach(creep => {
-    creep = Game.creeps[creep];
-    if (creep.memory.role === 'harvest') {
-      creepHarvest.run(creep);
-    } else if (creep.memory.role === 'upgrade') {
-      creepUpgrade.run(creep);
-    } else if (creep.memory.role === 'build') {
-      creepBuild.run(creep);
-    } else if (creep.memory.role === 'repair') {
-      creepRepair.run(creep);
-    } else if (creep.memory.role === 'wallrepair') {
-      creepWallRepair.run(creep);
-    } else if (creep.memory.role === 'mine') {
-      creepMine.run(creep);
-    } else if (creep.memory.role === 'transport') {
-      creepTransport.run(creep);
-    }
+    Game.creeps[creep].runRole();
   });
 
   Object.keys(Game.spawns).forEach(spawn => {
