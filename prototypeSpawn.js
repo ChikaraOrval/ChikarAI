@@ -63,6 +63,21 @@ StructureSpawn.prototype.spawnCreeps = function() {
     }
   }
 
+  const currLongDistance = {};
+  if (name === undefined) {
+    // count the number of long distance harvesters globally
+    for (const roomName in this.memory.minLongDistance) {
+      currLongDistance[roomName] = _.sum(
+        Game.creeps,
+        c => c.memory.role === 'longdistance' && c.memory.target === roomName
+      );
+
+      if (currLongDistance[roomName] < this.memory.minLongDistance[roomName]) {
+        name = this.createLongDistance(200, room.name, roomName, 0);
+      }
+    }
+  }
+
   //  const currLongDistance = {};
   //  if (name === undefined) {
   //    for (const roomName in this.memory.minLongDistance) {
